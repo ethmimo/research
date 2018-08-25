@@ -1,6 +1,6 @@
 # Mimo Research
 
-Welcome to the Mimo research logs.
+Welcome to the Mimo research repo.
 
 Author:
  - Ghilia Weldesselasie (@ghiliweld)
@@ -8,7 +8,7 @@ Author:
 ## Guide
 This is where my research on Mimo and decentralized identity will live. So if you want to be notified of updates in my research I suggest you watch this repo to get notifications.
 
-Navigating this repo is pretty simple. There's the main *README* (this), the *interim* folder, the *logs* folder and the *longterm* folder.
+Navigating this repo is pretty simple. There's the main *README* (this), the *Interim* folder, the *Logs* folder and the *Longterm* folder.
 
 **Logs** is where you'll find infrequent updates on my research, which is cool if you wanna see how I think and how I solve problems.
 
@@ -41,4 +41,4 @@ The end goal within the next 2-3 months is to have a demo that can satisfy the _
 
 Said demo will probably have costs associated with it (gas fees) and will be slightly centralized, but privacy and ease of use are essentials that shall never be sacrificed.
 
-I invite you to check out the [interim]() folder to see what's cooking in the lab!
+I invite you to check out the [interim](https://github.com/ethmimo/research/tree/master/interim) folder to see what's cooking in the lab!
