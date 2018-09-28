@@ -8,9 +8,7 @@ Author:
 ## Guide
 This is where my research on Mimo and decentralized identity will live. So if you want to be notified of updates in my research I suggest you watch this repo to get notifications.
 
-Navigating this repo is pretty simple. There's the main *README* (this), the *Interim* folder, the *Logs* folder and the *Longterm* folder.
-
-**Logs** is where you'll find infrequent updates on my research, which is cool if you wanna see how I think and how I solve problems.
+Navigating this repo is pretty simple. There's the main *README* (this), the *Interim* folder and the *Longterm* folder.
 
 For more frequent updates you'll want to follow me on Twitter (@ghiliweld), I often post threads with updates on my research since I like to buidl in public.
 
