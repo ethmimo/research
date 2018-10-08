@@ -1,7 +1,7 @@
 # E-Contracts and OrbitDB
 
 Author: **Ghilia Weldesselasie** <br>
-Date: *28/09/2018*
+Date: _28/09/2018_
 
 ---
 
@@ -63,11 +63,11 @@ E-contracts are still highly experimental (and purely theory at this point!) and
 
 IPFS' censorship resistant properties have not been thoroughly tested and it is still unknown if orbit dbs are as unstoppable as smart contracts on Ethereum.
 
-*Can a malicious node bypass the code in a db and add random data?*
+_Can a malicious node bypass the code in a db and add random data?_
 ~~If a malicious node is capable of bypassing the db store's code then that completely invalidates the concept of an off-chain smart contract.~~ <br>
 **Update 29/09/2018:** No peer is able to bypass the code in an orbit db store, which means that the code is law in our db.
 
-*Can a node pinning our db be target and DDOS-ed, what happens if it is (one of) the only node pinning our db?*
+_Can a node pinning our db be target and DDOS-ed, what happens if it is (one of) the only node pinning our db?_
 ~If bringing down an orbit db is too easy then e-contracts will be too centralized and an easy attack vector to bring down Dapps.~~ <br>
 **Update 29/09/2018:** Having a single node might be a risk factor but as more peers get on the network and with the advent of Filecoin, we can have those peers pin our db so that it stays censorship resistant.
 
@@ -84,77 +84,7 @@ This problem does not seem to be solvable unless we let go of the assumption tha
 ~~If we introduce a system where we add tags to usernames, similarly to how Discord has id numbers attached to usernames, we could allow for multiple registrations of the same name. As long as the combination of tag and name is unique, then it can be differentiated which is fine for our purpose.~~
 **Update 04/10/2018:** I'm ditching the tag approach since it makes for terrible UX. Users would have to remember both their names and their generated tag (which they don't get to choose). Check out the update on Oct. 4 to see what's next.
 
-We need some form of *uniqueness*, with *human readable identity* and *no consensus*.
-
+We need some form of _uniqueness_, with _human readable identity_ and _no consensus_.
 
 **Update 04/10/2018:**
-## Cosigning Name Registrations
-Consensus on IPFS doesn't seem possible to do for free and quickly among a huge networks of peers (hence why blockchains are even a thing). So if we can't have consensus among all our peers then we need a single source of truth concerning name registrations.
-
-**But then how do we use a single source of truth without dealing with the cons of centralization (single attack surface, lack of transparency/trustlessness)?**
-
-Turns we can do that with OrbitDB too :)
-
-**Using OrbitDB**, we can have a decentralized **cosigner**, an impartial claim signer in our system, sign claims of name registration. Our cosigner will also add a timestamp claims it signs, so that when parties need to verify who made a claim on a name first they can refer to our cosigner.
-
-Here's a simple implementation of our cosigner on orbit:
-
-```js
-
-const EthCrypto = require('eth-crypto');
-const Store = require('orbit-db-store');
-
-class Cosigner extends Store {
-    constructor() {
-        // A keypair is generated for our cosigner
-        const _details = EthCrypto.createIdentity();
-
-        // We create a getter to allow access to our cosigner's pubkey
-        this.publicKey = function() { return _details.publicKey; }
-
-        // We create a function that cosigns claims with our cosigner's privkey
-        this.signClaim = function(registration) {
-          // We get a prepped claim with a timestamp
-          const claim = prepClaim(registration);
-          const signedClaim = EthCrypto.sign(_details.privateKey, EthCrypto.hash.keccak256(JSON.stringify(claim))
-          );
-          // We return both the original claim and the signed claim
-          return { claim, signedClaim };
-        }
-    }
-
-    prepClaim (registration) {
-      if(registration.owner != recover(registration.name, registration.signature)) throw new Error();
-      // A timestamp is generated for when our claim was made
-      const timestamp = new Date();
-      // We return a prepped claim with a timestamp
-      return { registration.name, registration.owner, timestamp };
-    }
-}
-```
-Let's run through what's going on here.
-
-First, we submit a `registration` to the `signClaim()` method. A `registration` should include:
-- a `name`
-- an `owner`, the address that is claiming ownership of the name
-- a `signature`, the `name` signed by the `owner`'s private key.
-
-Next, our `registration` is prepped by the `prepClaim()` method. This method simply removes the `signature` and adds a `date` (a unix timestamp) to our claim.
-
-Finally, our claim is passed to `signClaim()` and signed by the cosigner's private key and returned with the prepped claim.
-
-## Why cosigning on Orbit works
-In a system where achieving network wide consensus is either too expensive or too inefficient, we have no choice but to leverage centralization to validate registration claims.
-
-However, with centralization comes the risks of shutdown since centralized entities are easier and more profitable targets to go after.
-
-OrbitDB is the key to an uncensorable/unstoppable single source of truth on IPFS. By distributing our cosigner on IPFS via Orbit we can have a cosigner that stays up as long as it's pinned by a peer and works the same for all peers.
-
-This cosigner approach allows to verify who claimed a name first and award ownership of a name to the it's rightful owner (the first person to claim it). This is verified through the timestamp we attach to claims.
-
-Meanning if we make a claim on a name before anyone else in the world, but because of issues with consensus on pubsub someone else takes ownership of a name before us, if we can prove that we really did claim this name first (with our timestamp) then can take ownership of the name at any time. This is where our impartial cosigner comes in to back up our claim. Alternatively, no one will be able to take our name from if we're the first ones to claim it.
-
-Let's call this **Proof of Dibs (PoD)** :)
-
-## How cosigning works in Mimo
-When creating a profile on Mimo, you'll have to submit a `claim` as well as a `signedClaim` (from our designated consigner). If you are the only one to register a profile at the time, then the profile goes to you. If the profile is already registered then the timestamps of both profiles are compared and whoever's timestamp is earliest gets/retains ownership of the profile. In the event of any conflicts due to lack of consensus algo on orbit, you simply have to resubmit your claim again to get the profile.
+See Cosigning.md for research on unique, human readable names without consensus.
