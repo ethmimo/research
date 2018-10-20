@@ -5,7 +5,7 @@ Date: _28/09/2018_
 
 ---
 
-An interim solution for Mimo would be using OrbitDB in combination with a concept I call e-contracts.
+An neat solution for Mimo would be using OrbitDB in combination with a concept I call e-contracts.
 The result is an identity system that allows for gasless, off-chain and fast updates to one's profile.
 
 ## What is OrbitDB?
@@ -87,4 +87,4 @@ This problem does not seem to be solvable unless we let go of the assumption tha
 We need some form of _uniqueness_, with _human readable identity_ and _no consensus_.
 
 **Update 04/10/2018:**
-See Cosigning.md for research on unique, human readable names without consensus.
+See [Cosigning.md](Cosigning.md) for research on unique, human readable names without consensus.
