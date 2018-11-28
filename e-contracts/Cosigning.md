@@ -77,3 +77,7 @@ When creating a profile on Mimo, you'll have to submit a `registration` as well 
 
 **Update 08/10/2018:**
 After testing out e-contracts at ETHSF, in my implementation of a State Channel using OrbitDB, I can confirm that transforming an orbit db instance into a "contract" does in fact work. A keypair can also be included to cosign claims meaning that OrbitDB really is a good fit for Mimo. There is still more work to do before a suitable off-chain identity solution is on mainnet, but this is a great step forward.
+
+**Update 28/11/2018:**
+# Earliest Registrants
+After thorough research we have concluded that ensuring that each profile has a unique name is impossible. So instead of going for truly unique names we decided to go with an approach called **earliest registration**. With this, instead of ensuring uniqueness we designated the first registrant of a name as the true owner. So if 1000 people register `@ghiliweld` after me, I will always be designated as the owner of `@ghiliweld`. All that's stored on the orbitdb is the timestamps for when the profile were created, while returning the earliest registrant is done on the client side by whatever Dapp you're using.
