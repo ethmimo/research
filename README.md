@@ -30,3 +30,17 @@ My research is focused creating an identity standard that is:
 - private (access to info is authorized by owner)
 - free to alter (no gas costs)
 - easy to use (from a UX and DX standpoint)
+- has human readable IDs
+
+## Requirements
+- [x] Users **MUST** be able to create many identities.
+- [x] Identities **SHOULD NOT** be able to be linked by a common user.
+- [x] Identifiers **MUST** must be human-readable.
+- [x] Identifiers **NEED NOT** be truly unique if we can verify the true owner of a name.
+- [x] Users **MUST** be able to access their identity across many apps.
+- [x] Users **MUST** be able to use Mimo without anything more than a keypair.
+- [ ] Mimo **SHOULD** work with as many wallets and data storage layers as possible.
+- [ ] Users **MUST** be able to share private data as intuitively and safely as possible.
+- [ ] Users **MUST** be able to do anything with their identities, including transferring it to another keypair.
+- [ ] Users **SHOULD** be able to delegate certain actions to other third-parties if desired.
+- [ ] Users **SHOULD** be able to recover their identities intuitively.
